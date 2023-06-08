@@ -16,25 +16,27 @@ export const ACTIONS = {
 function reducer(state, {type, payload})
 {
   switch(type){
+
     case ACTIONS.DELETE_DIGIT:
       if (state.overwrite) {
+        return {
+          ...state,
+          overwrite: false,
+          currentOperand: null,
+        }
+      }
+      if (state.currentOperand == null) return state
+      if (state.currentOperand.length == 1) {
+        return { ...state, currentOperand: null }
+      }
+
       return {
         ...state,
-        overwrite: false,
-        currentOperand: null
+        currentOperand: state.currentOperand.slice(0, -1),
       }
-    }
-    if (state.currentOperand == null) return state  
-    if (state.currentOperand.length === 1) {
-      return {...state, currentOperand: null }
-    }
-    return {
-      ...state,
-      currentOperand: state.currentOperand.slice(0, -1)
-    }
-      case ACTIONS.ADD_DIGIT:
-        if (state.overwrite)
-        {
+      
+    case ACTIONS.ADD_DIGIT:
+        if (state.overwrite){
           return {
             ...state,
             currentOperand: payload.digit,
@@ -43,9 +45,10 @@ function reducer(state, {type, payload})
         }
         if (payload.digit === "0" && state.currentOperand == "0") return state
         if (payload.digit === "." && state.currentOperand.includes(".")) return state
+
         return {
           ...state,
-          currentOperand: `${state.currentOperand || ""}${payload.digit} `,
+          currentOperand: `${state.currentOperand || ""}${payload.digit}`,
         }
 
       case ACTIONS.CHOOSE_OPERATION:
