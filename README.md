@@ -19,8 +19,8 @@
 + Minus 
 + Divide
 + Multiply
-+ Clear all (AC)
-+ Delete last entered item in payload (DEL)
++ Clear all **(AC)**
++ Delete last entered item in payload **(DEL)**
 
 
 ## Components
