@@ -13,6 +13,15 @@
 
 + useReducer hook
 
+## Functions supported
+
++ Add 
++ Minus 
++ Divide
++ Multiply
++ Clear all (AC)
++ Delete last entered item in payload (DEL)
+
 
 ## Components
 
